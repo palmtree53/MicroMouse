@@ -2,26 +2,27 @@
 // Created by aleks on 14.04.2026.
 //
 
+#include <array>
+
 #ifndef CPP_GRID_H
 #define CPP_GRID_H
-#include "Location.h"
+
+using namespace std;
 
 
 template<typename T, int W, int H> class Grid {
 
-    public:
-    T get(Location location) {
-        return cells[location.x()][location.y()];
+public:
+    T get(int x, int y) const {
+        return cells[y][x];
     }
-    void update(Location location, T cell) {
-        cells[location.x()][location.y()] = cell;
-    }
-    Grid(T table[W][H]) {
-        cells = table;
-    }
+    Grid() = default; //Grid() {}
+    int width() { return W; }
+    int height() { return H; }
+    void set(int x, int y, T v) { cells[y][x] = v; }
 
-    private:
-    T cells[W][H] = {};
+private:
+    array<array<T, H>, W> cells = {};
 
 };
 

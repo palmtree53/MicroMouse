@@ -6,18 +6,23 @@
 #define CPP_MAZE_H
 #include "Cell.h"
 #include "Grid.h"
+#include "Location.h"
 
 //todo size changes
 class Maze {
-    public:
-    void display();
-    void set(Grid<Cell, 1, 1> grid) {
-        this -> grid = grid;
 
-    }
+public:
+    Maze(const Grid<Cell, 16, 16> &grid, const Location start, const Location end) : start(start), end(end), grid(grid) {};
+
+    [[nodiscard]] Location getStart() const { return start; }
+    [[nodiscard]] Location getEnd() const { return end; }
+    [[nodiscard]] Grid<Cell, 16, 16> getGrid() const { return grid ; }
+
 
 private:
-    Grid<Cell, 1, 1> grid = {};
+    Grid<Cell, 16, 16> grid;
+    Location start;
+    Location end;
 
 };
 

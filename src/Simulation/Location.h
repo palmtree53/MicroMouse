@@ -6,20 +6,25 @@
 #define CPP_LOCATION_H
 
 
-
 class Location {
 
 public:
     Location(int x, int y) {
-        this->xValue = x;
-        this->yValue = y;
+        xValue = x;
+        yValue = y;
     }
-    int x() { return this->xValue; }
-    int y() { return this->xValue; }
+    [[nodiscard]] int x() const { return xValue; }
+    [[nodiscard]] int y() const { return yValue; }
+
+    bool operator==(const Location & location) const {
+        return this->xValue == location.xValue && this->yValue == location.yValue;
+    };
 
 private:
     int xValue;
     int yValue;
+
+
 };
 
 

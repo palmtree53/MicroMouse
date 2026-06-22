@@ -16,9 +16,9 @@ class Cell {
 public:
     Cell() {
         walls = {
-        {Direction::NORTH, true},
+        {Direction::NORTH, false},
         {Direction::EAST, false},
-        {Direction::SOUTH, true},
+        {Direction::SOUTH, false},
         {Direction::WEST, false},
         };
     }
@@ -30,7 +30,9 @@ public:
             {Direction::WEST, west},
             };
     }
+    map<Direction, bool> getWalls() { return walls; }
 
+private:
     map<Direction, bool> walls;
 };
 

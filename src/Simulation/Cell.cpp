@@ -4,7 +4,5 @@
 
 #include "Cell.h"
 
-#include <iostream>
-#include <ostream>
 
 

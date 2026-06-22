@@ -1,0 +1,32 @@
+//
+// Created by aleks on 21.06.2026.
+//
+
+#ifndef CPP_SIMULATIONCONTROLLER_H
+#define CPP_SIMULATIONCONTROLLER_H
+
+#include "../Simulation/Simulation.h"
+#include "../View/MazeView.h"
+#include "../Adapter/GridLoader.h"
+
+
+class SimulationController {
+
+public:
+    SimulationController(): view(MazeView()) {}
+    //todo destruktory - kiedy
+    //todo przekazywanie przez referencje - kiedy
+
+    Simulation create();
+    void run(Simulation &sim);
+
+
+private:
+    // Simulation sim;
+    MazeView view;
+
+};
+
+
+
+#endif //CPP_SIMULATIONCONTROLLER_H

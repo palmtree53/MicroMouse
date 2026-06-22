@@ -1,0 +1,24 @@
+{
+  "width": 16,
+  "height": 16,
+  "start": [0, 0],
+  "goal": [8, 8],
+  "walls": [
+    ["NSW", "NE", "NW", "NE", "NSW", "NS", "N", "NS", "NS", "NS", "NS", "NS", "NS", "NS", "NS", "NE"],
+    ["NEW", "EW", "EW", "SW", "NS", "NS", "E", "NW", "NS", "NS", "NE", "NW", "NS", "NS", "NSE", "EW"],
+    ["EW", "EW", "W", "NE", "NSW", "NS", "SE", "EW", "NW", "NS", "SE", "SW", "NE", "NW", "NS", "SE"],
+    ["EW", "EW", "EW", "SW", "NS", "NS", "NS", "SE", "EW", "NEW", "NW", "N", "SE", "SW", "NS", "NE"],
+    ["W", "SE", "SEW", "NW", "NS", "NS", "NS", "NS", "SE", "W", "SE", "SW", "NS", "NE", "NW", "SE"],
+    ["EW", "NW", "NE", "SW", "NS", "NE", "NEW", "NW", "NS", "S", "NSE", "NW", "NE", "EW", "SW", "NE"],
+    ["SW", "SE", "SW", "NE", "NW", "SE", "EW", "EW", "NSW", "NE", "NW", "SE", "EW", "W", "NSE", "EW"],
+    ["NSW", "NE", "NW", "SE", "EW", "NSW", "", "SE", "NW", "SE", "SW", "NE", "EW", "SW", "N", "SE"],
+    ["NW", "SE", "EW", "NW", "S", "NE", "SW", "NS", "SE", "NW", "NS", "SE", "SW", "NE", "SW", "NSE"],
+    ["EW", "NW", "SE", "SW", "NSE", "SW", "NE", "NW", "NS", "SE", "NEW", "NW", "NE", "SW", "NS", "NE"],
+    ["W", "SE", "NW", "NS", "NE", "NW", "E", "EW", "NW", "NE", "EW", "EW", "SW", "NE", "NW", "SE"],
+    ["SW", "NE", "W", "NE", "EW", "EW", "SEW", "SW", "SE", "EW", "EW", "EW", "NEW", "EW", "SW", "NE"],
+    ["NEW", "EW", "EW", "EW", "EW", "W", "NS", "NS", "NE", "SW", "E", "EW", "SW", "S", "NS", "E"],
+    ["W", "SE", "EW", "EW", "EW", "W", "NS", "NSE", "W", "NS", "SE", "SW", "NS", "NS", "NE", "EW"],
+    ["SW", "NE", "SEW", "EW", "EW", "SEW", "NW", "NE", "SW", "NS", "NS", "NS", "NS", "NSE", "EW", "EW"],
+    ["NSW", "S", "NS", "SE", "SW", "NS", "SE", "SW", "NS", "NS", "NS", "NS", "NS", "NS", "SE", "SEW"]
+  ]
+}
