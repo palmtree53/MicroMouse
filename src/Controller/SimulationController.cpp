@@ -9,7 +9,10 @@
 
 Simulation SimulationController::create() {
 
-    Grid<Cell, 16, 16> gridFromFIle = GridLoader::loadMaze<16,16>("../resources/maze1.json"); //change paths to working directory if if necessary
+    //settings
+
+    Grid<Cell> gridFromFIle = loadMaze("../resources/maze1.json"); //change paths to working directory if if necessary
+    //todo walidacje labiryntu
     Simulation sim = Simulation(gridFromFIle);
 
 

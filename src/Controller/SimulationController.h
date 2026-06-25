@@ -14,8 +14,6 @@ class SimulationController {
 
 public:
     SimulationController(): view(MazeView()) {}
-    //todo destruktory - kiedy
-    //todo przekazywanie przez referencje - kiedy
 
     Simulation create();
     void run(Simulation &sim);

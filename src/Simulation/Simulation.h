@@ -19,10 +19,10 @@ public:
     //create simulation based on parameters
     Simulation(
         //settings
-        const Grid<Cell, 16, 16> grid = Grid<Cell, 16, 16>(),
-        Robot robot = Robot(),
-        Location startPosition = Location(0, 8),
-        Location endPosition = Location(8, 8)
+        const Grid<Cell>& grid,
+        const Robot robot = Robot(),
+        const Location startPosition = Location(0, 8),
+        const Location endPosition = Location(8, 8)
     ): maze(grid, startPosition, endPosition), robot(robot), robotLocation(startPosition) {
         cout<<"initializing simualtion"<<endl;
         //todo assertions for start location and end location

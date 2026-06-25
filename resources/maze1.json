@@ -1,6 +1,4 @@
 {
-  "width": 16,
-  "height": 16,
   "start": [0, 0],
   "goal": [8, 8],
   "walls": [
