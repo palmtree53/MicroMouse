@@ -4,9 +4,6 @@
 
 #ifndef CPP_SIMULATION_H
 #define CPP_SIMULATION_H
-#include <iostream>
-#include <ostream>
-
 #include "Cell.h"
 #include "Maze.h"
 #include "Robot.h"
@@ -16,49 +13,20 @@
 class Simulation {
 
 public:
-    //create simulation based on parameters
     Simulation(
-        //settings
         const Grid<Cell>& grid,
-        const Robot robot = Robot(),
-        const Location startPosition = Location(0, 8),
-        const Location endPosition = Location(8, 8)
-    ): maze(grid, startPosition, endPosition), robot(robot), robotLocation(startPosition) {
-        cout<<"initializing simualtion"<<endl;
-        //todo assertions for start location and end location
-        cout<<"end location : "<<endPosition.x()<<", "<<endPosition.y()<<endl;
-        cout<<"start location: "<<startPosition.x()<<", "<<startPosition.y()<<endl;
-        cout<<"robot location: "<<robotLocation.x()<<", "<<robotLocation.y()<<endl;
-        cout<<"end initialization"<<endl<<endl;
-    }
-
-    void nextStep() {
-            robotLocation = robot.move(robotLocation);
-            cout<<"next step, robot location: "<<robotLocation.x()<<", "<<robotLocation.y()<<endl;
-    }
-
-    bool gameEnded() {
-        return robotLocation == maze.getEnd();
-    }
-
-
-    [[nodiscard]] Location getRobotLocation() const {
-        return robotLocation;
-    }
-
-    [[nodiscard]] Maze getMaze() const {
-        return maze;
-    }
-
-    // [[nodiscard]] Robot getRobot() const {
-    //     return robot;
-    // }
+        Robot robot = Robot(Location(0, 8)),
+        Location startPosition = Location(0, 8),
+        Location endPosition = Location(8, 8)
+    );
+    void nextStep();
+    [[nodiscard]] bool gameEnded() const;
+    [[nodiscard]] Location getRobotLocation() const;
+    [[nodiscard]] Maze getMaze() const;
 
 private:
-    Location robotLocation;
     Maze maze;
     Robot robot;
-
 };
 
 

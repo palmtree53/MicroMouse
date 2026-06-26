@@ -10,11 +10,12 @@
 class Robot {
 
 public:
-    Robot() = default;
-    //zakladajac z robot nie wie w jakiej komorce jest
-    Location move(Location currentLocation) {
-        return {currentLocation.x() + 1, currentLocation.y()};
-    }
+    explicit Robot(Location location);
+    Location move();
+    [[nodiscard]] Location getLocation() const;
+
+private:
+    Location currentLocation;
 };
 
 

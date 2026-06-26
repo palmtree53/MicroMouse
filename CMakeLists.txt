@@ -10,7 +10,6 @@ add_executable(
         src/TestClass.h
         src/Simulation/Simulation.cpp
         src/Simulation/Simulation.h
-        src/Simulation/Grid.cpp
         src/Simulation/Grid.h
         src/Simulation/Location.cpp
         src/Simulation/Location.h

@@ -12,18 +12,15 @@
 class Maze {
 
 public:
-    Maze(const Grid<Cell> &grid, const Location start, const Location end) : start(start), end(end), grid(grid) {};
-
-    [[nodiscard]] Location getStart() const { return start; }
-    [[nodiscard]] Location getEnd() const { return end; }
-    [[nodiscard]] Grid<Cell> getGrid() const { return grid ; }
-
+    Maze(const Grid<Cell> &grid, Location start, Location end);
+    [[nodiscard]] Location getStart() const;
+    [[nodiscard]] Location getEnd() const;
+    [[nodiscard]] Grid<Cell> getGrid() const;
 
 private:
     Grid<Cell> grid;
     Location start;
     Location end;
-
 };
 
 

@@ -11,8 +11,8 @@ void MazeView::draw(const Maze& state, Location robotLocation) {
     clear();
     // drawBorder();
 
-    for (int rowNumber = 0; rowNumber < defaultHeight; ++rowNumber) //y
-        for (int colNumber = 0; colNumber < defaultWidth; ++colNumber) //x
+    for (int rowNumber = 0; rowNumber < heightInCells; ++rowNumber) //y
+        for (int colNumber = 0; colNumber < widthInCells; ++colNumber) //x
         {
             Cell tempCell = state.getGrid().get(colNumber, rowNumber);
             putSprite(colNumber, rowNumber, writeCell(
@@ -29,11 +29,11 @@ void MazeView::draw(const Maze& state, Location robotLocation) {
 
 void MazeView::clear() {
     for (auto& row : buffer)
-        row.assign(w, 'e');
+        row.assign(totalWidth, 'e');
 }
 
 void MazeView::put(int x, int y, char c) {
-    if (x >= 0 && x < w && y >= 0 && y < h)
+    if (x >= 0 && x < totalWidth && y >= 0 && y < totalHeight)
         buffer[y][x] = c;
 }
 
@@ -41,7 +41,7 @@ void MazeView::putSprite(int x, int y, const vector<string>& sprite) {
     for (int row = 0; row < static_cast<int>(sprite.size()); ++row)//x, y są w ramach rozmiaru 16*16
         for (int col = 0; col < static_cast<int>(sprite[row].size()); ++col)
             // if (sprite[row][col] != ' ')   // treat space as transparent
-                put(defaultWidthSize*x + col, defaultHeightSize*y + row, sprite[row][col]);
+                put(cellWidthSize*x + col, cellHeightSize*y + row, sprite[row][col]);
 }
 
 vector<string> MazeView::writeCell(Cell cell, const bool &containsRobot, const bool &containsTarget) {

@@ -9,16 +9,10 @@
 class Location {
 
 public:
-    Location(int x, int y) {
-        xValue = x;
-        yValue = y;
-    }
-    [[nodiscard]] int x() const { return xValue; }
-    [[nodiscard]] int y() const { return yValue; }
-
-    bool operator==(const Location & location) const {
-        return this->xValue == location.xValue && this->yValue == location.yValue;
-    };
+    Location(int x, int y);
+    [[nodiscard]] int x() const;
+    [[nodiscard]] int y() const;
+    bool operator==(const Location & location) const;
 
 private:
     int xValue;
