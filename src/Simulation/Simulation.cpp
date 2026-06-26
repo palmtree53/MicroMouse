@@ -6,20 +6,32 @@
 
 
 //create simulation based on parameters
+// Simulation::Simulation(
+//     //settings
+//     const Grid<Cell>& grid,
+//     const Robot robot,
+//     const Location startPosition,
+//     const Location endPosition
+// ): maze(grid, startPosition, endPosition), robot(robot){
+//     cout<<"initializing simualtion"<<endl;
+//     //todo assertions for start location and end location
+//     cout<<"end location : "<<endPosition.x()<<", "<<endPosition.y()<<endl;
+//     cout<<"start location: "<<startPosition.x()<<", "<<startPosition.y()<<endl;
+//     cout<<"robot location: "<<robot.getLocation().x()<<", "<<robot.getLocation().y()<<endl;
+//     cout<<"end initialization"<<endl<<endl;
+// }
+
 Simulation::Simulation(
-    //settings
-    const Grid<Cell>& grid,
-    const Robot robot = Robot(Location(0, 8)),
-    const Location startPosition = Location(0, 8),
-    const Location endPosition = Location(8, 8)
-): maze(grid, startPosition, endPosition), robot(robot){
+        const Maze& maze,
+        Robot robot
+    ): maze(maze), robot(robot) {
     cout<<"initializing simualtion"<<endl;
     //todo assertions for start location and end location
-    cout<<"end location : "<<endPosition.x()<<", "<<endPosition.y()<<endl;
-    cout<<"start location: "<<startPosition.x()<<", "<<startPosition.y()<<endl;
+    cout<<"end location : "<<maze.getEnd().x()<<", "<<maze.getEnd().y()<<endl;
+    cout<<"start location: "<<maze.getStart().x()<<", "<<maze.getStart().y()<<endl;
     cout<<"robot location: "<<robot.getLocation().x()<<", "<<robot.getLocation().y()<<endl;
     cout<<"end initialization"<<endl<<endl;
-}
+};
 
 void Simulation::nextStep() {
     robot.move();

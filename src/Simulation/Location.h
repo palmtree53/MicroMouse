@@ -9,6 +9,7 @@
 class Location {
 
 public:
+    Location();
     Location(int x, int y);
     [[nodiscard]] int x() const;
     [[nodiscard]] int y() const;

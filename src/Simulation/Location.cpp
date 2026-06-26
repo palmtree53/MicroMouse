@@ -4,6 +4,8 @@
 
 #include "Location.h"
 
+Location::Location(): xValue(0), yValue(0) {};
+
 Location::Location(int x, int y) {
     xValue = x;
     yValue = y;

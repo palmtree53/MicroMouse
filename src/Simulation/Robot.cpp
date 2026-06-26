@@ -6,8 +6,9 @@
 
 Robot::Robot(const Location location): currentLocation(location) {}
 
-Location Robot::move() {
-    return {currentLocation.x() + 1, currentLocation.y()};
+//todo tutaj mozna zamienic na sprawdzenie czy robot sie ruszyl czy utknął -zwróć true-false
+void Robot::move() {
+    currentLocation = {currentLocation.x() + 1, currentLocation.y()};
 }
 Location Robot::getLocation() const {
     return currentLocation;

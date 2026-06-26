@@ -10,26 +10,27 @@
 Simulation SimulationController::create() {
 
     //settings
-    Grid<Cell> gridFromFIle = loadMaze("../resources/maze1.json"); //change paths to working directory if if necessary
+    auto maze = loadMaze("../resources/maze1.json"); //change paths to working directory if if necessary
+    auto robot = Robot(maze.getStart());
     //todo walidacje labiryntu
-    Simulation sim = Simulation(gridFromFIle);
+    auto simulation = Simulation(maze, robot);
 
 
     cout<<"Simulation initialized"<<endl;
-    view.draw(sim.getMaze(), sim.getRobotLocation());
+    view.draw(simulation.getMaze(), simulation.getRobotLocation());
 
-    return sim;
+    return simulation;
 }
 
 
-void SimulationController::run(Simulation &sim) {
+void SimulationController::run(Simulation &simulation) {
     do {
-        sim.nextStep();
-        view.draw(sim.getMaze(), sim.getRobotLocation());
-    } while (!sim.gameEnded());
+        simulation.nextStep();
+        view.draw(simulation.getMaze(), simulation.getRobotLocation());
+    } while (!simulation.gameEnded());
     cout<<"Game Ended"<<endl;
 
     //todo assertionts if robot is moving or game not ended or non-ending loop
 
-    view.draw(sim.getMaze(), sim.getRobotLocation());
+    view.draw(simulation.getMaze(), simulation.getRobotLocation());
 }

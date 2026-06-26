@@ -11,14 +11,13 @@
 #include "../Simulation/Cell.h"
 #include <nlohmann/json.hpp>
 
+#include "../Simulation/Maze.h"
+
 using namespace std;
 
-
 bool has(const std::string& s, char c);
-
 void from_json(const nlohmann::json& j, Cell& value);
-
-Grid<Cell> loadMaze(const string& path);
+Maze loadMaze(const string& path);
 
 
 #endif //CPP_GRIDLOADER_H

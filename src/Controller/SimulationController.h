@@ -16,7 +16,7 @@ public:
     SimulationController(): view(MazeView()) {}
 
     Simulation create();
-    void run(Simulation &sim);
+    void run(Simulation &simulation);
 
 
 private:

@@ -1,5 +1,5 @@
 {
-  "start": [0, 0],
+  "start": [0, 8],
   "goal": [8, 8],
   "walls": [
     ["NSW", "NE", "NW", "NE", "NSW", "NS", "N", "NS", "NS", "NS", "NS", "NS", "NS", "NS", "NS", "NE"],

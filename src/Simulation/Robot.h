@@ -11,7 +11,7 @@ class Robot {
 
 public:
     explicit Robot(Location location);
-    Location move();
+    void move();
     [[nodiscard]] Location getLocation() const;
 
 private:

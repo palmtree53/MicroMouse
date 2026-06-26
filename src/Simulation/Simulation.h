@@ -7,17 +7,23 @@
 #include "Cell.h"
 #include "Maze.h"
 #include "Robot.h"
+#include <iostream>
 
 //todo change everything that keeps hardcoded 16x16 grid
 //todo kto wie gdzie znajduje się robot? robot? labirynt? czy symulacja?
 class Simulation {
 
 public:
+    // Simulation(
+    //     const Grid<Cell>& grid,
+    //     Robot robot = Robot(Location(0, 8)),
+    //     Location startPosition = Location(0, 8),
+    //     Location endPosition = Location(8, 8)
+    // );
+
     Simulation(
-        const Grid<Cell>& grid,
-        Robot robot = Robot(Location(0, 8)),
-        Location startPosition = Location(0, 8),
-        Location endPosition = Location(8, 8)
+        const Maze& maze,
+        Robot robot
     );
     void nextStep();
     [[nodiscard]] bool gameEnded() const;
