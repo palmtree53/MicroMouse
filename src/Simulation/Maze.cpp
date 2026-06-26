@@ -8,3 +8,16 @@ Maze::Maze(const Grid<Cell> &grid, const Location start, const Location end) : s
 [[nodiscard]] Location Maze::getStart() const { return start; }
 [[nodiscard]] Location Maze::getEnd() const { return end; }
 [[nodiscard]] Grid<Cell> Maze::getGrid() const { return grid ; }
+
+[[nodiscard]] set<Direction> Maze::possibleDirections(Location location) const {
+    auto cell = grid.get(location.x(), location.y());
+    cell.getWalls();
+
+    set<Direction> openDirections;
+    for (const auto& [dir, isWall] : cell.getWalls()) {
+        if (!isWall) {
+            openDirections.insert(dir);
+        }
+    }
+    return openDirections;
+};

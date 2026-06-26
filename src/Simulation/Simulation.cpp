@@ -4,23 +4,6 @@
 
 #include "Simulation.h"
 
-
-//create simulation based on parameters
-// Simulation::Simulation(
-//     //settings
-//     const Grid<Cell>& grid,
-//     const Robot robot,
-//     const Location startPosition,
-//     const Location endPosition
-// ): maze(grid, startPosition, endPosition), robot(robot){
-//     cout<<"initializing simualtion"<<endl;
-//     //todo assertions for start location and end location
-//     cout<<"end location : "<<endPosition.x()<<", "<<endPosition.y()<<endl;
-//     cout<<"start location: "<<startPosition.x()<<", "<<startPosition.y()<<endl;
-//     cout<<"robot location: "<<robot.getLocation().x()<<", "<<robot.getLocation().y()<<endl;
-//     cout<<"end initialization"<<endl<<endl;
-// }
-
 Simulation::Simulation(
         const Maze& maze,
         Robot robot
@@ -34,7 +17,8 @@ Simulation::Simulation(
 };
 
 void Simulation::nextStep() {
-    robot.move();
+    set<Direction> possibleDirections = maze.possibleDirections(robot.getLocation());
+    robot.move(possibleDirections);
     cout<<"next step, robot location: "<<robot.getLocation().x()<<", "<<robot.getLocation().y()<<endl;
 }
 

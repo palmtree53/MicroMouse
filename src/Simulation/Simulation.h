@@ -14,12 +14,6 @@
 class Simulation {
 
 public:
-    // Simulation(
-    //     const Grid<Cell>& grid,
-    //     Robot robot = Robot(Location(0, 8)),
-    //     Location startPosition = Location(0, 8),
-    //     Location endPosition = Location(8, 8)
-    // );
 
     Simulation(
         const Maze& maze,
