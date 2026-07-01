@@ -7,19 +7,17 @@
 #include <map>
 #include <bits/basic_string.h>
 
+#include "AbstractCell.h"
 #include "Direction.h"
 
 using namespace std;
 
-class Cell {
+class Cell: public AbstractCell {
 
 public:
-    Cell();
-    Cell(bool north, bool south, bool east, bool west);
-    map<Direction, bool> getWalls() { return walls; }
+    Cell() {} //for nlohmann-json
+    Cell(bool north, bool south, bool east, bool west): AbstractCell(north, south, east, west) {}
 
-private:
-    map<Direction, bool> walls;
 };
 
 

@@ -6,6 +6,7 @@
 #define CPP_MAZE_H
 
 #include <set>
+#include <unordered_set>
 
 #include "Cell.h"
 #include "Grid.h"
@@ -20,6 +21,8 @@ public:
     [[nodiscard]] Location getEnd() const;
     [[nodiscard]] Grid<Cell> getGrid() const;
     [[nodiscard]] set<Direction> possibleDirections(Location location) const;
+
+    vector<Location> possibleMoves(Location location) const;
 
 private:
     Grid<Cell> grid;

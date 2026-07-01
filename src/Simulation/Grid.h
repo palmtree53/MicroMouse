@@ -4,6 +4,8 @@
 
 #include <vector>
 
+#include "Location.h"
+
 #ifndef CPP_GRID_H
 #define CPP_GRID_H
 
@@ -13,12 +15,14 @@ using namespace std;
 template<typename T> class Grid {
 
 public:
+    Grid(int width, int height) :width(width), height(height), cells(height, std::vector<T>(width, T())) {}
     explicit Grid(vector<vector<T>> v) : width(getWidth(v)), height(getHeight(v)), cells(v) {}
     [[nodiscard]] int getWidth() const { return width; }
     [[nodiscard]] int getHeight() const { return height; }
-    T get(int x, int y) const {
-        return cells[y][x];
-    }
+    T& get(int x, int y) {return cells[y][x];}
+    T get(int x, int y) const {return cells[y][x];}
+    T& get(const Location location) {return cells[location.y()][location.x()];} //x- inner vector, y-outer vector
+    T get(const Location location) const {return cells[location.y()][location.x()];} //x- inner vector, y-outer vector
     void set(int x, int y, T v) {
         //boundaries check
         cells[y][x] = v;

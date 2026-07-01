@@ -12,6 +12,7 @@
 #include "../Simulation/Cell.h"
 #include "../Simulation/Maze.h"
 #include "../Simulation/Location.h"
+#include "../Simulation/RobotCell.h"
 
 
 using namespace std;
@@ -27,7 +28,9 @@ public:
           buffer(height * cellHeightSize, string(width * cellWidthSize, 'e')) {
     }
 
-    void draw(const Maze& state, Location robotLocation);
+    void drawMaze(const Maze& state, Location robotLocation);
+    void drawRobotMaze(const Grid<RobotCell>& state, Location currentRobotLocation);
+
 
 private:
     int widthInCells;
@@ -43,6 +46,8 @@ private:
     void putSprite(int x, int y, const vector<string>& sprite);
     static vector<string> writeCell(Cell cell, const bool &containsRobot, const bool &containsTarget);
     void render() const;
+
+    vector<string> writeRobotCell(const RobotCell& cell, bool isRobotThere);
 
 };
 

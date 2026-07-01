@@ -4,6 +4,7 @@
 
 #ifndef CPP_LOCATION_H
 #define CPP_LOCATION_H
+#include "Direction.h"
 
 
 class Location {
@@ -14,7 +15,8 @@ public:
     [[nodiscard]] int x() const;
     [[nodiscard]] int y() const;
     bool operator==(const Location & location) const;
-
+    Location operator+(Direction direction) const;
+    bool operator<(const Location& other) const;
 private:
     int xValue;
     int yValue;

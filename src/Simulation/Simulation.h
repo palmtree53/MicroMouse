@@ -9,6 +9,8 @@
 #include "Robot.h"
 #include <iostream>
 
+#include "algorithms/ExplorationAlgorithm.h"
+
 //todo change everything that keeps hardcoded 16x16 grid
 //todo kto wie gdzie znajduje się robot? robot? labirynt? czy symulacja?
 class Simulation {
@@ -17,16 +19,18 @@ public:
 
     Simulation(
         const Maze& maze,
-        Robot robot
+        const Robot& robot
     );
-    void nextStep();
-    [[nodiscard]] bool gameEnded() const;
+    // void nextStep();
+    // [[nodiscard]] bool gameEnded() const;
     [[nodiscard]] Location getRobotLocation() const;
-    [[nodiscard]] Maze getMaze() const;
+    [[nodiscard]] const Maze& getMaze() const;
+     Robot& getRobot();
 
 private:
     Maze maze;
     Robot robot;
+    // ExplorationAlgorithm algorithm; polimorfizm - dodac tutaj albo w robocie
 };
 
 

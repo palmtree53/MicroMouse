@@ -4,9 +4,11 @@
 
 #include "MazeView.h"
 
+#include "../Simulation/RobotCell.h"
+
 
 //todo robot location and destination location - in cell or separate
-void MazeView::draw(const Maze& state, Location robotLocation) {
+void MazeView::drawMaze(const Maze& state, Location robotLocation) {
     // void draw(const GameState& state) {
     clear();
     // drawBorder();
@@ -65,6 +67,44 @@ void MazeView::render() const {
     for (const auto& row : buffer)
         std::cout << row << '\n';
     std::cout.flush();
+}
+
+//zamienic na polimorfizm
+void MazeView::drawRobotMaze(const Grid<RobotCell>& state, Location currentRobotLocation) {
+    // void draw(const GameState& state) {
+    clear();
+    // drawBorder();
+
+    for (int rowNumber = 0; rowNumber < heightInCells; ++rowNumber) //y
+        for (int colNumber = 0; colNumber < widthInCells; ++colNumber) //x
+        {
+            RobotCell tempCell = state.get(colNumber, rowNumber);
+            putSprite(colNumber, rowNumber, writeRobotCell(
+                tempCell,
+                currentRobotLocation.x() == colNumber && currentRobotLocation.y() == rowNumber
+                )
+            );
+        }
+
+    // drawHUD(state);
+    render();
+}
+
+
+vector<string> MazeView::writeRobotCell(const RobotCell& cell, bool isRobotThere) {
+
+    return {
+        cell.getWalls()[Direction::NORTH] == true ? "'-----'" : "'     '",
+        string(cell.getWalls()[Direction::WEST] == true ? "|" : " ")
+        + string(isRobotThere ? "R" : " ")
+        + string(isRobotThere ? "RRR" : cell.getVisited() ? " x "  : "   ")
+        + string(isRobotThere ? "R" : " ")
+        + (cell.getWalls()[Direction::EAST] == true ? "|" : " "),
+        cell.getWalls()[Direction::SOUTH] == true ? ",_____," : ",     ,"
+    };
+
+
+
 }
 
 

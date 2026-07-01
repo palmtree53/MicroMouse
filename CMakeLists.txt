@@ -14,7 +14,6 @@ add_executable(
         src/Simulation/Location.cpp
         src/Simulation/Location.h
         src/Simulation/Direction.h
-        src/Simulation/Cell.cpp
         src/Simulation/Cell.h
         src/Simulation/Maze.cpp
         src/Simulation/Maze.h
@@ -26,6 +25,20 @@ add_executable(
         src/Controller/SimulationController.h
         src/Adapter/GridLoader.cpp
         src/Adapter/GridLoader.h
+        src/Simulation/algorithms/ExplorationAlgorithm.cpp
+        src/Simulation/algorithms/ExplorationAlgorithm.h
+        src/Simulation/UnknownCell.h
+        src/Simulation/AbstractCell.h
+        src/Simulation/RobotCell.h
+        src/Simulation/AbstractCell.cpp
+        src/Simulation/algorithms/ExplorationAlgRandom.cpp
+        src/Simulation/algorithms/ExplorationAlgRandom.h
+        src/Simulation/algorithms/ExplorationAlgSimpleDFS.cpp
+        src/Simulation/algorithms/ExplorationAlgSimpleDFS.h
+        src/Simulation/algorithms/OptimizationAlgorithm.cpp
+        src/Simulation/algorithms/OptimizationAlgorithm.h
+        src/Simulation/algorithms/OptimizationAlgorithmBFS.cpp
+        src/Simulation/algorithms/OptimizationAlgorithmBFS.h
 )
 
 target_include_directories(cpp PRIVATE

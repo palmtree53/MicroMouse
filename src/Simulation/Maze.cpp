@@ -11,8 +11,6 @@ Maze::Maze(const Grid<Cell> &grid, const Location start, const Location end) : s
 
 [[nodiscard]] set<Direction> Maze::possibleDirections(Location location) const {
     auto cell = grid.get(location.x(), location.y());
-    cell.getWalls();
-
     set<Direction> openDirections;
     for (const auto& [dir, isWall] : cell.getWalls()) {
         if (!isWall) {
@@ -20,4 +18,18 @@ Maze::Maze(const Grid<Cell> &grid, const Location start, const Location end) : s
         }
     }
     return openDirections;
-};
+}
+
+
+[[nodiscard]] vector<Location> Maze::possibleMoves(Location location) const {
+    auto cell = grid.get(location.x(), location.y());
+    vector<Location> openLocations;
+    for (const auto& [dir, isWall] : cell.getWalls()) {
+        if (!isWall) {
+            openLocations.push_back(location+dir);
+        }
+    }
+    return openLocations;
+}
+
+
