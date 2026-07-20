@@ -4,7 +4,7 @@
   "mazeHeight": 16,
   "mazeWidth": 16,
   "walls": [
-    ["NSW", "NE", "NW", "NE", "NSW", "NS", "N", "NS", "NS", "NS", "NS", "NS", "NS", "NS", "NS", "NE"],
+    ["NSW", "NE", "NW", "NE", "NSW", "NS", "N", "NS", "NS", "NS", "NS", "NS", "NS", "NS", "NS", "NE", "NE", "NE"],
     ["NEW", "EW", "EW", "SW", "NS", "NS", "E", "NW", "NS", "NS", "NE", "NW", "NS", "NS", "NSE", "EW"],
     ["EW", "EW", "W", "NE", "NSW", "NS", "SE", "EW", "NW", "NS", "SE", "SW", "NE", "NW", "NS", "SE"],
     ["EW", "EW", "EW", "SW", "NS", "NS", "NS", "SE", "EW", "NEW", "NW", "N", "SE", "SW", "NS", "NE"],
@@ -19,8 +19,7 @@
     ["NEW", "EW", "EW", "EW", "EW", "W", "NS", "NS", "NE", "SW", "E", "EW", "SW", "S", "NS", "E"],
     ["W", "SE", "EW", "EW", "EW", "W", "NS", "NSE", "W", "NS", "SE", "SW", "NS", "NS", "NE", "EW"],
     ["SW", "NE", "SEW", "EW", "EW", "SEW", "NW", "NE", "SW", "NS", "NS", "NS", "NS", "NSE", "EW", "EW"],
-    ["NSW", "S", "NS", "SE", "SW", "NS", "SE", "SW", "NS", "NS", "NS", "NS", "NS", "NS", "SE", "SEW"]
+    ["NSW", "S", "NS", "SE", "SW", "NS", "SE", "SW", "NS", "NS", "NS", "NS", "NS", "NS", "SE", "SEW", "NE", "NE"]
   ],
   "algorithm": "DFS"
-
 }

@@ -4,11 +4,12 @@
 
 #include "MazeView.h"
 
-#include "../Simulation/RobotCell.h"
+#include <iostream>
 
+using namespace std;
 
 //todo robot location and destination location - in cell or separate
-void MazeView::drawMaze(const Maze& state, Location robotLocation) {
+void MazeView::drawMaze(const Simulation& sim) {
     // void draw(const GameState& state) {
     clear();
     // drawBorder();
@@ -16,12 +17,14 @@ void MazeView::drawMaze(const Maze& state, Location robotLocation) {
     for (int rowNumber = 0; rowNumber < heightInCells; ++rowNumber) //y
         for (int colNumber = 0; colNumber < widthInCells; ++colNumber) //x
         {
-            Cell tempCell = state.getGrid().get(colNumber, rowNumber);
+            MazeCell tempCell = sim.getMaze().getGrid().get(colNumber, rowNumber);
             putSprite(colNumber, rowNumber, writeCell(
-                tempCell,
-                robotLocation.x() == colNumber && robotLocation.y() == rowNumber,
-                state.getEnd().x() == colNumber && state.getEnd().y() == rowNumber
-                )
+                          tempCell,
+                          sim.getRobot()->getLocation().x() == colNumber && sim.getRobot()->getLocation().y() == rowNumber,
+                          sim.getMaze().getEnd().x() == colNumber && sim.getMaze().getEnd().y() == rowNumber,
+                          sim.getRobot()->getGridMap().get(colNumber, rowNumber).getVisited()
+                          // sim.getRobotMaze().get(colNumber, rowNumber).getVisited()
+                      )
             );
         }
 
@@ -46,13 +49,13 @@ void MazeView::putSprite(int x, int y, const vector<string>& sprite) {
                 put(cellWidthSize*x + col, cellHeightSize*y + row, sprite[row][col]);
 }
 
-vector<string> MazeView::writeCell(Cell cell, const bool &containsRobot, const bool &containsTarget) {
+vector<string> MazeView::writeCell(const MazeCell& cell, const bool &containsRobot, const bool &containsTarget, const bool visited) {
 
     return {
         cell.getWalls()[Direction::NORTH] == true ? "'-----'" : "'     '",
         string(cell.getWalls()[Direction::WEST] == true ? "|" : " ")
         + " "
-        + string(containsRobot && containsTarget ? "R F"  : containsTarget ? "  F" : containsRobot ? "R  " : "   ")
+        + string(containsRobot && containsTarget ? "RRF"  : containsTarget ? "  F" : containsRobot ? "RR " : visited ? " - " : "   ")
         + " "
         + (cell.getWalls()[Direction::EAST] == true ? "|" : " "),
         cell.getWalls()[Direction::SOUTH] == true ? ",_____," : ",     ,"
@@ -63,10 +66,10 @@ vector<string> MazeView::writeCell(Cell cell, const bool &containsRobot, const b
 }
 
 void MazeView::render() const {
-    // std::cout << "\033[H";
+    // cout << "\033[H";
     for (const auto& row : buffer)
-        std::cout << row << '\n';
-    std::cout.flush();
+        cout << row << '\n';
+    cout.flush();
 }
 
 //zamienic na polimorfizm

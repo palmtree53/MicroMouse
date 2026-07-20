@@ -6,18 +6,8 @@
 #define CPP_MAZEVIEW_H
 
 #include <string>
-#include <vector>
-#include <iostream>
 
-#include "../Simulation/Cell.h"
-#include "../Simulation/Maze.h"
-#include "../Simulation/Location.h"
-#include "../Simulation/RobotCell.h"
-
-
-using namespace std;
-
-
+#include "../Simulation/Simulation.h"
 
 class MazeView {
 public:
@@ -28,7 +18,7 @@ public:
           buffer(height * cellHeightSize, string(width * cellWidthSize, 'e')) {
     }
 
-    void drawMaze(const Maze& state, Location robotLocation);
+    void drawMaze(const Simulation& sim);
     void drawRobotMaze(const Grid<RobotCell>& state, Location currentRobotLocation);
 
 
@@ -44,7 +34,7 @@ private:
     void put(int x, int y, char c);
     //x, y w ramach rozmiaru widthInCells*heightInCells
     void putSprite(int x, int y, const vector<string>& sprite);
-    static vector<string> writeCell(Cell cell, const bool &containsRobot, const bool &containsTarget);
+    static vector<string> writeCell(const MazeCell& cell, const bool &containsRobot, const bool &containsTarget, bool visited);
     void render() const;
 
     vector<string> writeRobotCell(const RobotCell& cell, bool isRobotThere);

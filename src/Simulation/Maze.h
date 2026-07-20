@@ -6,26 +6,23 @@
 #define CPP_MAZE_H
 
 #include <set>
-#include <unordered_set>
 
-#include "Cell.h"
+#include "MazeCell.h"
 #include "Grid.h"
-#include "Location.h"
 
 //todo size changes
 class Maze {
 
 public:
-    Maze(const Grid<Cell> &grid, Location start, Location end);
+    Maze(const Grid<MazeCell> &grid, Location start, Location end);
     [[nodiscard]] Location getStart() const;
     [[nodiscard]] Location getEnd() const;
-    [[nodiscard]] Grid<Cell> getGrid() const;
-    [[nodiscard]] set<Direction> possibleDirections(Location location) const;
-
-    vector<Location> possibleMoves(Location location) const;
+    [[nodiscard]] Grid<MazeCell> getGrid() const;
+    [[nodiscard]] bool containsGoal(Location location) const;
+    [[nodiscard]] std::vector<Location> possibleMoves(Location location) const;
 
 private:
-    Grid<Cell> grid;
+    Grid<MazeCell> grid;
     Location start;
     Location end;
 };

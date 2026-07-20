@@ -3,10 +3,8 @@
 //
 
 #include "Location.h"
-
 #include <stdexcept>
 
-#include "Direction.h"
 
 Location::Location(): xValue(0), yValue(0) {};
 

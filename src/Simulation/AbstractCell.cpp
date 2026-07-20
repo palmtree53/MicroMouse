@@ -3,6 +3,7 @@
 //
 
 #include "AbstractCell.h"
+using namespace std;
 
 void AbstractCell::setWalls(bool north, bool south, bool east, bool west) {
     walls = {

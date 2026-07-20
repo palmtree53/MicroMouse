@@ -3,24 +3,27 @@
 //
 
 #include "Simulation.h"
+#include <iostream>
+
+using namespace std;
 
 Simulation::Simulation(
-        const Maze& maze,
-        const Robot& robot
+        Maze& maze,
+        Robot* robot
     ): maze(maze), robot(robot) {
     cout<<"initializing simualtion"<<endl;
     //todo assertions for start location and end location
-    cout<<"end location : "<<maze.getEnd().x()<<", "<<maze.getEnd().y()<<endl;
+    // cout<<"end location : "<<maze.getEnd().x()<<", "<<maze.getEnd().y()<<endl;
     cout<<"start location: "<<maze.getStart().x()<<", "<<maze.getStart().y()<<endl;
-    cout<<"robot location: "<<robot.getLocation().x()<<", "<<robot.getLocation().y()<<endl;
+    cout<<"robot location: "<<robot->getLocation().x()<<", "<<robot->getLocation().y()<<endl;
     cout<<"end initialization"<<endl<<endl;
 };
 
-// void Simulation::nextStep() {
-//     set<Direction> possibleDirections = maze.possibleDirections(robot.getLocation());
-//     robot.move(possibleDirections);
-//     cout<<"next step, robot location: "<<robot.getLocation().x()<<", "<<robot.getLocation().y()<<endl;
-// }
+void Simulation::nextStep() {
+    // set<Direction> possibleDirections = maze.possibleDirections(robot.getLocation());
+    robot->nextStep(maze);
+    cout<<"next step, robot location: "<<robot->getLocation().x()<<", "<<robot->getLocation().y()<<"     exploration steps: "<<robot->getStepNumber()<<"     opptimization steps: "<<robot->getOptimalPathStepNumber()<<endl;
+}
 
 // [[nodiscard]] bool Simulation::gameEnded() const {
 //     return robot.getLocation() == maze.getEnd();
@@ -28,11 +31,21 @@ Simulation::Simulation(
 
 
 [[nodiscard]] Location Simulation::getRobotLocation() const {
-    return robot.getLocation();
+    return robot->getLocation();
 }
 
 [[nodiscard]] const Maze& Simulation::getMaze() const {
     return maze;
 }
 
-Robot& Simulation::getRobot() {return robot;}
+[[nodiscard]] const Robot * Simulation::getRobot() const {
+    return robot;
+}
+
+[[nodiscard]] bool Simulation::isFinished() const {
+    return robot->isFinished();
+}
+
+
+// Robot& Simulation::getRobot() {return *robot;}
+

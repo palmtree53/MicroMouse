@@ -4,33 +4,51 @@
 
 #ifndef CPP_SIMULATION_H
 #define CPP_SIMULATION_H
-#include "Cell.h"
 #include "Maze.h"
 #include "Robot.h"
-#include <iostream>
 
-#include "algorithms/ExplorationAlgorithm.h"
-
-//todo change everything that keeps hardcoded 16x16 grid
-//todo kto wie gdzie znajduje się robot? robot? labirynt? czy symulacja?
 class Simulation {
 
 public:
 
     Simulation(
-        const Maze& maze,
-        const Robot& robot
+        Maze& maze,
+        Robot* robot
     );
-    // void nextStep();
+    void nextStep();
     // [[nodiscard]] bool gameEnded() const;
     [[nodiscard]] Location getRobotLocation() const;
     [[nodiscard]] const Maze& getMaze() const;
-     Robot& getRobot();
+    [[nodiscard]] const Robot * getRobot() const;
+
+    [[nodiscard]] bool isFinished() const;
+
+    // [[nodiscard]] Grid<RobotCell> getRobotMaze() const;
+
+    // Robot& getRobot();
+    ~Simulation() { delete robot; }
+    Simulation(const Simulation&) = delete;
+    Simulation& operator=(const Simulation&) = delete;
+    Simulation(Simulation&& other) noexcept
+            : maze(std::move(other.maze)), robot(other.robot) {
+        other.robot = nullptr;
+    }
+    Simulation& operator=(Simulation&& other) noexcept {
+        if (this != &other) {
+            delete robot;
+            maze = std::move(other.maze);
+            robot = other.robot;
+            other.robot = nullptr;
+        }
+        return *this;
+    }
+
+    // [[nodiscard]] int getExplorationStepNumber() const;
+    // [[nodiscard]] int getOptimizationStepNumber() const;
 
 private:
     Maze maze;
-    Robot robot;
-    // ExplorationAlgorithm algorithm; polimorfizm - dodac tutaj albo w robocie
+    Robot* robot;
 };
 
 

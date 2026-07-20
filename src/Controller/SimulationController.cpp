@@ -4,61 +4,91 @@
 
 #include "SimulationController.h"
 
-#include "../Simulation/algorithms/ExplorationAlgRandom.h"
+#include "../Simulation/RobotBFSOptimizer.h"
+#include "../Simulation/RobotDfsExplorer.h"
+#include "../Adapter/GridLoader.h"
+#include "../View/MenuView.h"
+
+#include <thread>
+#include <chrono>
+#include <iostream>
+
+using namespace std;
 
 
 Simulation SimulationController::create() {
 
     //settings
-    auto maze = loadMaze("../resources/maze1.json"); //change paths to working directory if if necessary
-    // auto algorithm = ExplorationAlgRandom{};
+    auto const path = loadPath();
+    auto const algorithm = loadAlgorithm(path); //change paths to working directory if if necessary
+    auto const mazeWidth = loadWidth(path); //change paths to working directory if if necessary
+    auto const mazeHeight = loadHeight(path); //change paths to working directory if if necessary
 
-    auto robot = Robot(maze.getStart(), maze.getGrid().getWidth(), maze.getGrid().getHeight());
+    //maze
+    auto maze = loadMaze(path, mazeWidth, mazeHeight); //change paths to working directory if if necessary
+
+    Robot* robot = createRobot(algorithm, maze.getStart(), maze.getGrid().getWidth(), maze.getGrid().getHeight());  //zamienic na parametry
     //todo walidacje labiryntu
 
     auto simulation = Simulation(maze, robot);
-
-
+    view.drawMaze(simulation);
     cout<<"Simulation initialized"<<endl;
-    view.drawMaze(simulation.getMaze(), simulation.getRobotLocation());
-
     return simulation;
 }
-//how is it reusable?
-
-
-// void SimulationController::run(Simulation &simulation) {
-//     do {
-//         simulation.nextStep();
-//         view.draw(simulation.getMaze(), simulation.getRobotLocation());
-//     } while (!simulation.gameEnded());
-//     cout<<"Game Ended"<<endl;
-//
-//     //todo assertionts if robot is moving or game not ended or non-ending loop
-//
-//     view.draw(simulation.getMaze(), simulation.getRobotLocation());
-// }
 
 void SimulationController::run(Simulation &simulation) {
+    do {
+        simulation.nextStep();
+        this_thread::sleep_for(chrono::milliseconds(300));
+        view.drawMaze(simulation);
+    } while (!simulation.isFinished());
+    cout<<"Game Ended"<<endl;
+    // assertionts if robot is moving or non-ending loop or it is stuck and came is corrupted
+}
 
-    auto algorithm = ExplorationAlgRandom{};
-    algorithm.exploreMaze(simulation.getMaze().getStart(),  simulation.getMaze(),  simulation.getRobot());
 
+Robot* SimulationController::createRobot(const std::string& kind, const Location start, const int width, const int height) {
+    if (kind == "DFS") return new RobotDfsExplorer(start, width, height);
+    if (kind == "BFS") return new RobotBFSOptimizer(start, width, height);
+    // if (kind == "Random") return new RobotRandom(start, width, height);
+    throw std::invalid_argument("Unknown robot type: " + kind);
+}
 
-    //debug only
-    auto moves = simulation.getRobot().getMoves();
-    cout<<"list of moves"<<endl;
-    for (auto move: moves) {
-        cout<<move.x()<<","<<move.y()<<endl;
-    }
+void SimulationController::runLoop() {
+    //start - menu
+    char choice = 0;
+    do {
+        switch (state) {
+            case GameState::PRELIMINARY: {
+                cout<<"debug - state PRELIMINARY ------------------"<<endl; //todo debug
+                do {
+                    MenuView::draw();
+                    cin>>choice;
+                    choice = tolower(choice);
+                } while (! (choice == 's' || choice == 'c'));
+                if (choice == 's') state = GameState::RUNNING;
+                break;
+            }
+            case GameState::RUNNING: {
+                cout<<"debug - state RUNNING ------------------"<<endl; //todo debug
+                Simulation sim = create();
+                run(sim);
+                if (choice == 's') state = GameState::FINISHED;
+                break;
+            }
+            case GameState::FINISHED: {
+                cout<<"debug - state FINISHED ------------------"<<endl; //todo debug
+                do {
+                    cout<<endl<<"ENTER M TO GO TO MAIN MENU OR C TO CLOSE"<<endl;
+                    cin>>choice;
+                    choice = tolower(choice);
+                } while (! (choice == 'm' || choice == 'c'));
+                if (choice == 'm') state = GameState::PRELIMINARY;
+                break;
+            }
+        }
 
-    // do {
-    //     simulation.nextStep();
-    //     view.drawMaze(simulation.getMaze(), simulation.getRobotLocation());
-    // } while (!simulation.gameEnded());
-    // cout<<"Game Ended"<<endl;
-    //
-    // //todo assertionts if robot is moving or game not ended or non-ending loop
-    //
-    // view.drawMaze(simulation.getMaze(), simulation.getRobotLocation());
+    } while (choice != 'c');
+    cout<<endl<<"CLOSING GAME"<<endl;
+
 }
