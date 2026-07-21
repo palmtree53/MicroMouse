@@ -6,8 +6,6 @@
 #define CPP_ROBOTDFS_H
 #include "Robot.h"
 
-
-
 //find the way out robot
 class RobotDfsExplorer: public Robot {
 

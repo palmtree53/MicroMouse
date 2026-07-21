@@ -11,7 +11,7 @@
 
 class MazeView {
 public:
-    MazeView(int width=16, int height=16)
+    MazeView(int width, int height)
         : widthInCells(width), heightInCells(height),
           totalWidth(width * cellWidthSize),
           totalHeight(height * cellHeightSize),
@@ -19,10 +19,14 @@ public:
     }
 
     void drawMaze(const Simulation& sim);
-    void drawRobotMaze(const Grid<RobotCell>& state, Location currentRobotLocation);
+
+    void drawMaze(const Maze &maze);
+
+    // void drawRobotMaze(const Grid<RobotCell>& state, Location currentRobotLocation);
 
 
 private:
+    //todo czy te wartosci są koniecznie - i tak jest przekazana cała symulacja
     int widthInCells;
     int heightInCells;
     int cellWidthSize = 7;
@@ -34,10 +38,11 @@ private:
     void put(int x, int y, char c);
     //x, y w ramach rozmiaru widthInCells*heightInCells
     void putSprite(int x, int y, const vector<string>& sprite);
-    static vector<string> writeCell(const MazeCell& cell, const bool &containsRobot, const bool &containsTarget, bool visited);
+    static vector<string> writeCell(const MazeCell &cell, const bool &containsStart, const bool &containsTarget, const bool &containsRobot = false, bool remembered = false, bool
+                                    visited = false);
     void render() const;
 
-    vector<string> writeRobotCell(const RobotCell& cell, bool isRobotThere);
+    // vector<string> writeRobotCell(const RobotCell& cell, bool isRobotThere);
 
 };
 

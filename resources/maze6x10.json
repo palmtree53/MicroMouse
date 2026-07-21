@@ -1,0 +1,19 @@
+{
+  "start": [0, 0],
+  "goal": [5, 9],
+  "mazeHeight": 10,
+  "mazeWidth": 6,
+  "walls": [
+    ["NSW", "NS", "NS", "NS", "NE", "NEW"],
+    ["NW", "NS", "NS", "NE", "SW", "E"],
+    ["EW", "NW", "NS", "SE", "NW", "SE"],
+    ["EW", "EW", "NW", "NE", "SW", "NE"],
+    ["EW", "EW", "EW", "SW", "NE", "EW"],
+    ["EW", "EW", "EW", "NW", "SE", "EW"],
+    ["EW", "EW", "EW", "SW", "NE", "EW"],
+    ["EW", "EW", "EW", "NW", "SE", "EW"],
+    ["EW", "SW", "SE", "SW", "NS", "SE"],
+    ["SW", "NS", "NS", "NS", "NS", "NSE"]
+  ],
+  "algorithm": "DFS"
+}

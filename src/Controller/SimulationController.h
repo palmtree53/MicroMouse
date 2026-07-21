@@ -15,14 +15,12 @@ enum class GameState;
 class SimulationController {
 
 public:
-    SimulationController(): view(MazeView()) {}
     Simulation create();
     void run(Simulation &simulation);
     Robot *createRobot(const string &kind, Location start, int width, int height);
     void runLoop();
 
 private:
-    MazeView view;  //todo zmienić
     GameState state = GameState::PRELIMINARY;
 
 };

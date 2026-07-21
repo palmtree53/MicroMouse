@@ -9,6 +9,7 @@ using namespace std;
 
 void MenuView::draw() {
     cout<<endl<<endl<<"WELCOME TO THE MICROMOUSE SIMULATION"<<endl<<endl;
-    cout<<endl<<endl<<"SO START A SIMULATION PRESS S"<<endl<<endl;
-    cout<<endl<<endl<<"SO CLOSE PRESS C"<<endl<<endl;
+    cout<<endl<<endl<<"TO SEE FILE WRITTEN MAZE PREVIEW ENTER V"<<endl<<endl;
+    cout<<endl<<endl<<"TO START A SIMULATION ENTER S"<<endl<<endl;
+    cout<<endl<<endl<<"TO CLOSE ENTER C"<<endl<<endl;
 }

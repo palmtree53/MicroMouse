@@ -13,7 +13,7 @@ Simulation::Simulation(
     ): maze(maze), robot(robot) {
     cout<<"initializing simualtion"<<endl;
     //todo assertions for start location and end location
-    // cout<<"end location : "<<maze.getEnd().x()<<", "<<maze.getEnd().y()<<endl;
+    cout<<"end location : "<<maze.getEnd().x()<<", "<<maze.getEnd().y()<<endl;
     cout<<"start location: "<<maze.getStart().x()<<", "<<maze.getStart().y()<<endl;
     cout<<"robot location: "<<robot->getLocation().x()<<", "<<robot->getLocation().y()<<endl;
     cout<<"end initialization"<<endl<<endl;
@@ -22,7 +22,11 @@ Simulation::Simulation(
 void Simulation::nextStep() {
     // set<Direction> possibleDirections = maze.possibleDirections(robot.getLocation());
     robot->nextStep(maze);
-    cout<<"next step, robot location: "<<robot->getLocation().x()<<", "<<robot->getLocation().y()<<"     exploration steps: "<<robot->getStepNumber()<<"     opptimization steps: "<<robot->getOptimalPathStepNumber()<<endl;
+    cout<<"next step, robot location: "<<robot->getLocation().x()<<", "<<robot->getLocation().y()
+    <<"     exploration steps: "<<robot->getStepNumber()
+    <<"     opptimization steps: "<<robot->getOptimalPathStepNumber()
+    <<"     dead end count: "<<robot->getDeadEndCount()
+    <<endl<<endl;
 }
 
 // [[nodiscard]] bool Simulation::gameEnded() const {

@@ -28,12 +28,13 @@ public:
     [[nodiscard]] bool visitedLocation(Location location) const;
 
     virtual const Grid<RobotCell>& getGridMap() const = 0;
-    vector<Location> getMoves() {return moves;};
+    vector<Location> getMoves() {return moves;}
 
     virtual void nextStep(const Maze& maze) = 0;
     [[nodiscard]] bool isFinished() const;
     [[nodiscard]] int getStepNumber() const { return stepNumber; }
     [[nodiscard]] int getOptimalPathStepNumber() const { return optimaPathStepNumber; } //todo jak to rozwiązać?
+    [[nodiscard]] int getDeadEndCount() const { return deadEndCount; }
 
 protected:
     explicit Robot(Location location, int mazeWeight, int mazeHeight);
@@ -47,6 +48,7 @@ protected:
 
     int stepNumber = 0;
     int optimaPathStepNumber = 0;
+    int deadEndCount = 0;
 
     RobotState state = RobotState::EXPLORING;
 

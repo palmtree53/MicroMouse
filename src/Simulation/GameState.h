@@ -9,6 +9,7 @@
 
 enum class GameState {
     PRELIMINARY,
+    MAZE_PREVIEW,
     RUNNING,
     FINISHED
 };

@@ -56,6 +56,10 @@ add_executable(
         src/View/MenuView.cpp
         src/View/MenuView.h
         src/Simulation/GameState.h
+        src/View/MazePreview.cpp
+        src/View/MazePreview.h
+        src/Simulation/RobotRandomExplorer.cpp
+        src/Simulation/RobotRandomExplorer.h
 )
 
 target_include_directories(cpp PRIVATE

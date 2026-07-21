@@ -28,13 +28,16 @@ void RobotDfsExplorer::exploreMaze(Location location, const Maze& maze, bool& fo
     if (maze.containsGoal(location)) { found = true; return; };
     vector<Location> possibleMoves = maze.possibleMoves(location);
 
+    bool visited = false;
     for (auto& possibleMove: possibleMoves) {
         if (!visitedLocation(possibleMove)) {
+            visited = true;
             exploreMaze(possibleMove, maze, found);
             if (found) return;
             addMove(location); //write when backs
         }
     }
+    if (!visited) deadEndCount++;
 
 }
 
