@@ -17,10 +17,26 @@ Simulation::Simulation(
     cout<<"start location: "<<maze.getStart().x()<<", "<<maze.getStart().y()<<endl;
     cout<<"robot location: "<<robot->getLocation().x()<<", "<<robot->getLocation().y()<<endl;
     cout<<"end initialization"<<endl<<endl;
-};
+}
+
+Simulation::Simulation(Simulation&& other) noexcept
+        : maze(std::move(other.maze)), robot(other.robot) {
+    other.robot = nullptr;
+}
+
+Simulation& Simulation::operator=(Simulation&& other) noexcept {
+    if (this != &other) {
+        delete robot;
+        maze = std::move(other.maze);
+        robot = other.robot;
+        other.robot = nullptr;
+    }
+    return *this;
+}
+
+Simulation::~Simulation() { delete robot; }
 
 void Simulation::nextStep() {
-    // set<Direction> possibleDirections = maze.possibleDirections(robot.getLocation());
     robot->nextStep(maze);
     cout<<"next step, robot location: "<<robot->getLocation().x()<<", "<<robot->getLocation().y()
     <<"     exploration steps: "<<robot->getStepNumber()
@@ -28,10 +44,6 @@ void Simulation::nextStep() {
     <<"     dead end count: "<<robot->getDeadEndCount()
     <<endl<<endl;
 }
-
-// [[nodiscard]] bool Simulation::gameEnded() const {
-//     return robot.getLocation() == maze.getEnd();
-// }
 
 
 [[nodiscard]] Location Simulation::getRobotLocation() const {
@@ -49,7 +61,4 @@ void Simulation::nextStep() {
 [[nodiscard]] bool Simulation::isFinished() const {
     return robot->isFinished();
 }
-
-
-// Robot& Simulation::getRobot() {return *robot;}
 

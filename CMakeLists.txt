@@ -36,7 +36,6 @@ add_executable(
         src/Adapter/GridLoader.h
         src/Simulation/algorithms/ExplorationAlgorithm.cpp
         src/Simulation/algorithms/ExplorationAlgorithm.h
-        src/Simulation/UnknownCell.h
         src/Simulation/AbstractCell.h
         src/Simulation/RobotCell.h
         src/Simulation/AbstractCell.cpp

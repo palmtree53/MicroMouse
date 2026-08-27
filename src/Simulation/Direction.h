@@ -6,7 +6,11 @@
 #define CPP_DIRECTION_H
 
 
-
+/**
+ * @ingroup SimulationModule
+ * @enum Direction
+ * @brief Represents the four directions in the maze.
+ */
 enum class Direction {
     NORTH,
     SOUTH,

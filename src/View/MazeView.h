@@ -9,8 +9,22 @@
 
 #include "../Simulation/Simulation.h"
 
+/**
+ * @ingroup ViewModule
+ * @brief Prints the maze to the console.
+ *
+ * Draws the maze grid cell by cell into an internal character buffer,
+ * then prints it to standard output. Supports rendering with or
+ * without simulation state. Is used in the simulation state.
+ */
 class MazeView {
 public:
+    /**
+     * @brief Creates a view for a maze with the given dimensions.
+     *
+     * @param width  Maze width in cells.
+     * @param height Maze height in cells.
+     */
     MazeView(int width, int height)
         : widthInCells(width), heightInCells(height),
           totalWidth(width * cellWidthSize),
@@ -18,9 +32,23 @@ public:
           buffer(height * cellHeightSize, string(width * cellWidthSize, 'e')) {
     }
 
+    /**
+     * @brief Draws the maze with full simulation state.
+     *
+     * Renders walls, start, end, robot position and visited cells.
+     *
+     * @param sim The current simulation to read state from.
+     */
     void drawMaze(const Simulation& sim);
 
-    void drawMaze(const Maze &maze);
+    /**
+     * @brief Draws the maze without simulation state.
+     *
+     * Renders only walls, start and end markers.
+     *
+     * @param maze The maze to draw.
+     */
+    void drawMaze(const Maze& maze);
 
     // void drawRobotMaze(const Grid<RobotCell>& state, Location currentRobotLocation);
 
