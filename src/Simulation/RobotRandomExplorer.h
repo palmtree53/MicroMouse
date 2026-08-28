@@ -9,7 +9,7 @@
  *
  * Added mostly to have a additional type for variety. Unlike DFS and BFS robots,
  * this one has no strategy — it just moves randomly until it stumbles on exit.
- * Does not optimize.
+ * Does not optimize. Does not keep memory if the maze.
  */
 class RobotRandomExplorer: public Robot  {
 public:
@@ -23,14 +23,12 @@ public:
 
     /**
      * @brief Picks a random available move and goes there. Finishes when it reaches the goal.
-     * @param maze The maze.
+     * @param possibleMoves
+     * @param containGoal
      */
-    void nextStep(const Maze& maze) override;
+    bool nextStep(const vector<Location> &possibleMoves, bool containGoal) override;
 
-    /**
-     * @brief Returns the exploration map. Throws if called in OPTIMIZING state since this robot never optimizes.
-     */
-    [[nodiscard]] const Grid<RobotCell> &getGridMap() const override;
+
 };
 
 

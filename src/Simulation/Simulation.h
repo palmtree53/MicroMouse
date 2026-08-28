@@ -31,32 +31,24 @@ public:
 
     /**
      * @brief Moves through the actions needed for the simulation to make one step — delegates to robot's logic.
+     * Orchestrates the relationship between Robot and Maze.
      */
-    void nextStep();
-
-    /**
-     * @brief Returns the robot's current location.
-     * @return Current location of the robot on the maze.
-     */
-    [[nodiscard]] Location getRobotLocation() const;
+    [[nodiscard]] bool nextStep() const;
 
     /**
      * @brief Returns a reference to the maze.
      * @return The maze used in this simulation.
+     * Used for the view.
      */
     [[nodiscard]] const Maze& getMaze() const;
 
     /**
      * @brief Returns a pointer to the robot.
      * @return The robot used in this simulation. Cannot be modified through this pointer.
+     * Used for the view.
      */
     [[nodiscard]] const Robot* getRobot() const;
 
-    /**
-     * @brief Checks whether the simulation has ended.
-     * @return True if the robot has finished its task.
-     */
-    [[nodiscard]] bool isFinished() const;
 
     /** @brief Destructor. Deletes robot.*/
     ~Simulation();

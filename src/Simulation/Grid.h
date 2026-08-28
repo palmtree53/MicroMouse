@@ -14,7 +14,7 @@
 /**
  * @ingroup SimulationModule
  * @class Grid
- * @brief A generic 2D grid that stores elements of any type. Used for maze cells, robot maps..
+ * @brief A generic 2D grid that stores elements of any type. Used for maze cells, robot maps.
  * @tparam T Type of element stored in each cell.
  */
 template<typename T> class Grid {
@@ -24,6 +24,7 @@ public:
      * @brief Creates an empty grid filled with default values.
      * @param width
      * @param height
+     * Used for loading from json files.
      */
     Grid(int width, int height) :width(width), height(height), cells(height, std::vector<T>(width, T())) {}
 
@@ -60,8 +61,9 @@ private:
     int width, height;
     std::vector<std::vector<T>> cells;
 
+    //walidacje
     int calculateWidth(const std::vector<std::vector<T>>& v) {
-        return v.empty() ? 0 : static_cast<int>(v[0].size());   //todo
+        return static_cast<int>(v[0].size());
     }
     int calculateHeight(const std::vector<std::vector<T>>& v) {
         return static_cast<int>(v.size());

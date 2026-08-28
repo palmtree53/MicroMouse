@@ -57,7 +57,15 @@ void validateGrid(int w, int h, const vector<vector<MazeCell>>& cells) {
     }
 }
 
-string loadPath() {
+
+
+void loadSettings(
+    std::string& mazePath,
+    std::string& algorithm,
+    int& simulationRefreshTimeInMils,
+    int& startScreenWaitTime,
+    bool & debug
+) {
     string path = "../resources/settings.json";
     ifstream in(path);
     if (!in) {
@@ -66,11 +74,18 @@ string loadPath() {
     nlohmann::json j;
     in >> j;
 
-    auto algorithm = j.at("mazePath").get<string>();
-    return algorithm;
+    mazePath = j.at("mazePath").get<string>();
+    algorithm = j.at("algorithm").get<string>();
+    simulationRefreshTimeInMils = j.at("simulationRefreshTimeInMils").get<int>();
+    startScreenWaitTime = j.at("startScreenWaitTime").get<int>();
+    auto debugString = j.at("DEBUG").get<string>();
+    if (tolower(debugString.at(0)) == 'y') debug = true; else debug = false;
 }
 
-string loadAlgorithm(const string& path) {
+void loadMazePath(
+    std::string& mazePath
+) {
+    string path = "../resources/settings.json";
     ifstream in(path);
     if (!in) {
         throw runtime_error("Could not open file: " + path);
@@ -78,8 +93,7 @@ string loadAlgorithm(const string& path) {
     nlohmann::json j;
     in >> j;
 
-    auto algorithm = j.at("algorithm").get<string>();
-    return algorithm;
+    mazePath = j.at("mazePath").get<string>();
 }
 
 

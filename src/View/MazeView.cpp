@@ -50,6 +50,24 @@ void MazeView::drawMaze(const Maze& maze) {
     render();
 }
 
+void MazeView::drawMaze(const Grid<RobotCell>& grid) {
+    clear();
+
+    for (int rowNumber = 0; rowNumber < heightInCells; ++rowNumber) //y
+        for (int colNumber = 0; colNumber < widthInCells; ++colNumber) //x
+        {
+            RobotCell tempCell = grid.get(colNumber, rowNumber);
+            putSprite(colNumber, rowNumber, writeCell(
+                          tempCell,
+                          false,
+                          false
+                      )
+            );
+        }
+
+    render();
+}
+
 void MazeView::clear() {
     for (auto& row : buffer)
         row.assign(totalWidth, 'e');
@@ -67,7 +85,7 @@ void MazeView::putSprite(int x, int y, const vector<string>& sprite) {
                 put(cellWidthSize*x + col, cellHeightSize*y + row, sprite[row][col]);
 }
 
-vector<string> MazeView::writeCell(const MazeCell& cell, const bool &containsStart, const bool &containsTarget, const bool &containsRobot, const bool remembered, const bool visited) {
+vector<string> MazeView::writeCell(const AbstractCell& cell, const bool &containsStart, const bool &containsTarget, const bool &containsRobot, const bool remembered, const bool visited) {
     //todo visited kiedy nie jest zapamietany, remebered kiedy zapisany na mapie
     return {
         cell.getWalls()[Direction::NORTH] == true ? "'-----'" : "'     '",
@@ -96,49 +114,12 @@ vector<string> MazeView::writeCell(const MazeCell& cell, const bool &containsSta
 }
 
 void MazeView::render() const {
-    // cout << "\033[H";
+    // cout << "\033[2J\033[H";
+    cout << "\033[H";
+    // system("cls");
     for (const auto& row : buffer)
-        cout << row << '\n';
+        cout << row << "\033[K" <<endl; // "\033[K" do czyszczenia do końców linii
     cout.flush();
 }
-
-//zamienic na polimorfizm ??
-// void MazeView::drawRobotMaze(const Grid<RobotCell>& state, Location currentRobotLocation) {
-//     // void draw(const GameState& state) {
-//     clear();
-//     // drawBorder();
-//
-//     for (int rowNumber = 0; rowNumber < heightInCells; ++rowNumber) //y
-//         for (int colNumber = 0; colNumber < widthInCells; ++colNumber) //x
-//         {
-//             RobotCell tempCell = state.get(colNumber, rowNumber);
-//             putSprite(colNumber, rowNumber, writeRobotCell(
-//                 tempCell,
-//                 currentRobotLocation.x() == colNumber && currentRobotLocation.y() == rowNumber
-//                 )
-//             );
-//         }
-//
-//     // drawHUD(state);
-//     render();
-// }
-
-
-// vector<string> MazeView::writeRobotCell(const RobotCell& cell, bool isRobotThere) {
-//
-//     return {
-//         cell.getWalls()[Direction::NORTH] == true ? "'-----'" : "'     '",
-//         string(cell.getWalls()[Direction::WEST] == true ? "|" : " ")
-//         + string(isRobotThere ? "R" : " ")
-//         + string(isRobotThere ? "RRR" : cell.getVisited() ? " x "  : "   ")
-//         + string(isRobotThere ? "R" : " ")
-//         + (cell.getWalls()[Direction::EAST] == true ? "|" : " "),
-//         cell.getWalls()[Direction::SOUTH] == true ? ",_____," : ",     ,"
-//     };
-//
-//
-//
-// }
-
 
 

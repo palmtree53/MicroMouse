@@ -9,6 +9,5 @@
     ["EW", "EW", "EW", "NW", "NE"],
     ["EW", "SW", "SE", "EW", "EW"],
     ["SW", "NS", "NS", "SE", "SEW"]
-  ],
-  "algorithm": "RANDOM"
+  ]
 }

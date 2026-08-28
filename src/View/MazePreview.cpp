@@ -9,6 +9,7 @@
 using namespace std;
 
 void MazePreview::draw(Maze& maze) {
+    system("cls");
     cout<<endl<<endl<<"MAZE PREVIEW"<<endl<<endl;
     MazeView view(maze.getGrid().getWidth(), maze.getGrid().getHeight());
     view.drawMaze(maze);

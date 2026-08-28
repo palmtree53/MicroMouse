@@ -17,72 +17,71 @@ using namespace std;
  * @class Robot
  * @brief Base class for all robots. Handles movement, tracking visited cells, and storing maps.
  * Each subclass implements its own exploration strategy via nextStep().
+ * Robot generally know the appearance of the maze - it's with and height and position it will be starting at.
+ * Depending on implementation, could have memory of where it has been or not.
  * Currently does not have relative directions (f. e. to the left, to the right), always knows the absolute direction - (f. north, south)
+ * and doesnt turn around, always has fixed position.
  */
 class Robot {
 
 public:
-    virtual ~Robot() = default;
+     /**
+     * @brief Performs one step of the robot's algorithm.
+     * @param possibleMoves the move that step can go to
+     * @param containGoal - informs whether the current location contains a goal
+     */
+    virtual bool nextStep(const vector<Location> &possibleMoves, bool containGoal) = 0;
 
     /** @brief Returns where the robot currently is. */
     [[nodiscard]] Location getLocation() const;
 
-    /** @brief Saves a move to the given location to the moves history. */
-    void addMove(Location location);
-
     /**
-     * @brief Updates the robot's own map with wall info at the given location.
-     * Also marks the cell as visited.
+     * @brief Returns the grid map build on robots moves in the maze. giving information about the robot's memory.
+     * Used mainly to view.
      */
-    void updateMap(Location location, const map<Direction, bool>& walls);
+    [[nodiscard]] virtual const Grid<RobotCell>& getGridMap() const;
 
-    /** @brief Marks a cell on the exploration path map as visited. */
-    void updateExplorationPathMap(Location location);
+    /** @brief Returns the full history of moves the robot has made. */
+    vector<Location> getMoves();
 
-    /** @brief Marks a cell on the optimal path map as visited. */
-    void updateOptimizationPathMap(Location location);
+    /** @brief Returns number of steps. */
+     [[nodiscard]] virtual int getStepNumber() const;
 
+    /** @brief Returns number of steps made in optimal path. */
+    [[nodiscard]] virtual int getOptimalPathStepNumber() const;
+
+    /** @brief Returns counted number or encountered dead ends in maze. */
+     [[nodiscard]] int getDeadEndCount() const;
+
+     virtual ~Robot() = default;
+
+
+protected:
     /** @brief Checks if the robot has already been in this location. */
     [[nodiscard]] bool visitedLocation(Location location) const;
 
     /**
-     * @brief Returns the grid map giving information about the robot's current state.
-     * Each subclass decides which map to return (exploration or optimal path).
-     */
-    virtual const Grid<RobotCell>& getGridMap() const = 0;
-
-    /** @brief Returns the full list of moves the robot has made. */
-    vector<Location> getMoves() {return moves;}
-
-    /**
-     * @brief Performs one step of the robot's algorithm.
-     * Each subclass implements difrent logic here.
-     * @param maze The maze to navigate.
-     */
-    virtual void nextStep(const Maze& maze) = 0;
-
-    /** @brief Checks if the robot is done with its task. */
-    [[nodiscard]] bool isFinished() const;
-
-    [[nodiscard]] int getStepNumber() const { return stepNumber; }
-    [[nodiscard]] int getOptimalPathStepNumber() const { return optimaPathStepNumber; }
-    [[nodiscard]] int getDeadEndCount() const { return deadEndCount; }
-
-protected:
-    /**
      * @brief Creates a robot at the given location with maps sized to the maze.
-     * @param location Starting position.
-     * @param mazeWeight Maze width (columns).
-     * @param mazeHeight Maze height (rows).
+     * @param start assigns a start of the maze location  and also a current location
+     * @param mazeWeight Maze width (columns) (columns) to initialize it's internal map.
+     * @param mazeHeight Maze height (rows) to initialize it's internal map.
      */
-    explicit Robot(Location location, int mazeWeight, int mazeHeight);
+    explicit Robot(Location start, int mazeWeight, int mazeHeight);
+
+    /**
+     * @brief Updates the robot's own map with based on moves now available.
+     * Builds the robots view and knowledge about shape of maze and walls. Marks the cell as visited. Needed for optimization.
+     */
+    void updateMap(Location location, const vector<Location> &possibleMoves);
+
+    /** @brief Saves a move to the given location to the moves history. */
+    void addMove(Location location);
 
     Location currentLocation;
     vector<Location> moves;
     Grid<RobotCell> gridMap;
-    Grid<RobotCell> explorationMap;
-    Grid<RobotCell> optimalPathMap;
-    bool finished = false;
+    Location start;
+    Location end;
 
     int stepNumber = 0;
     int optimaPathStepNumber = 0;

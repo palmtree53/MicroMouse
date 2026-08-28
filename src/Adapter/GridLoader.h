@@ -55,11 +55,30 @@ void from_json(const nlohmann::json& j, MazeCell& value);
 Maze loadMaze(const std::string& path, int w, int h);
 
 /**
- * @brief Loads the maze file path from the configuration.
+ * @brief Loads the general settings.
  *
- * @return A string containing the path to the maze file.
+ * @param[out] mazePath path to the chosen maze.
+ * @param[out] algorithm choosing of the algorithm.
+ * @param[out] simulationRefreshTimeInMils time for one frame to be displayed.
+ * @param[out] startScreenWaitTime time to show start simulation screen with simulation options.
+ * @param[out] debug option to turn on some debug logs.
  */
-std::string loadPath();
+void loadSettings(
+    std::string& mazePath,
+    std::string& algorithm,
+    int& simulationRefreshTimeInMils,
+    int& startScreenWaitTime,
+    bool& debug
+);
+
+/**
+ * @brief Loads maze path.
+ *
+ * @param[out] mazePath path to the chosen maze.
+ */
+void loadMazePath(
+    std::string& mazePath
+);
 
 /**
  * @brief Loads the algorithm name from a configuration file.

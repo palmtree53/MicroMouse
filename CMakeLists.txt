@@ -34,23 +34,13 @@ add_executable(
         src/Controller/SimulationController.h
         src/Adapter/GridLoader.cpp
         src/Adapter/GridLoader.h
-        src/Simulation/algorithms/ExplorationAlgorithm.cpp
-        src/Simulation/algorithms/ExplorationAlgorithm.h
         src/Simulation/AbstractCell.h
         src/Simulation/RobotCell.h
         src/Simulation/AbstractCell.cpp
-        src/Simulation/algorithms/ExplorationAlgRandom.cpp
-        src/Simulation/algorithms/ExplorationAlgRandom.h
-        src/Simulation/algorithms/ExplorationAlgSimpleDFS.cpp
-        src/Simulation/algorithms/ExplorationAlgSimpleDFS.h
-        src/Simulation/algorithms/OptimizationAlgorithm.cpp
-        src/Simulation/algorithms/OptimizationAlgorithm.h
-        src/Simulation/algorithms/OptimizationAlgorithmBFS.cpp
-        src/Simulation/algorithms/OptimizationAlgorithmBFS.h
         src/Simulation/RobotDfsExplorer.cpp
         src/Simulation/RobotDfsExplorer.h
-        src/Simulation/RobotBFSOptimizer.cpp
-        src/Simulation/RobotBFSOptimizer.h
+        src/Simulation/RobotBFSOptimizerNew.cpp
+        src/Simulation/RobotBFSOptimizerNew.cpp
         src/Simulation/RobotState.h
         src/View/MenuView.cpp
         src/View/MenuView.h

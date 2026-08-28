@@ -36,7 +36,7 @@ public:
 
     /**
      * @brief Sets walls from an existing map.
-     * @param walls Map of directions to wall presence.
+     * @param walls Map of directions to wall existence.
      */
     void setWalls(std::map<Direction, bool> walls);
 

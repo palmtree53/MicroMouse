@@ -1,3 +1,7 @@
 {
-  "mazePath": "../resources/maze5x5.json"
+  "mazePath": "../resources/maze9x9.json",
+  "algorithm": "DFS",
+  "simulationRefreshTimeInMils": 150,
+  "startScreenWaitTime": 7000,
+  "DEBUG": "NO"
 }

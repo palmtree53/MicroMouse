@@ -10,7 +10,7 @@
 int main() {
     SetConsoleOutputCP(CP_UTF8);
 
-    SimulationController simController = SimulationController();    //todo ustatycznić
+    SimulationController simController = SimulationController();
     simController.runLoop();
 
 

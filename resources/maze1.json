@@ -20,7 +20,6 @@
     ["W", "SE", "EW", "EW", "EW", "W", "NS", "NSE", "W", "NS", "SE", "SW", "NS", "NS", "NE", "EW"],
     ["SW", "NE", "SEW", "EW", "EW", "SEW", "NW", "NE", "SW", "NS", "NS", "NS", "NS", "NSE", "EW", "EW"],
     ["NSW", "S", "NS", "SE", "SW", "NS", "SE", "SW", "NS", "NS", "NS", "NS", "NS", "NS", "SE", "SEW"]
-  ],
-  "algorithm": "DFS"
+  ]
 
 }

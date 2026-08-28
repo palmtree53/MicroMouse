@@ -5,47 +5,39 @@
 #include "RobotDfsExplorer.h"
 #include <stdexcept>
 
-//to make possible recursive function, the whole path is calculated upfront. the rule of robot not knowing the maze is still respected
-void RobotDfsExplorer::nextStep(const Maze& maze) {
-    if (!calculated) {
-        bool found = false;
-        exploreMaze(maze.getStart(), maze, found);
-        calculated = true;
-    } else {
-        if (moves.size() > stepNumber) {
-            currentLocation = moves[stepNumber];
-            updateExplorationPathMap(currentLocation);
-            stepNumber++;
-        } else { finished = true; }
-    }
+bool RobotDfsExplorer::nextStep(const vector<Location> &possibleMoves, const bool containGoal) {
+    bool explorationResult = stepThroughExploration(possibleMoves, containGoal);
+    if (explorationResult == true) { return true; }
+    return false;
 }
 
-void RobotDfsExplorer::exploreMaze(Location location, const Maze& maze, bool& found) {
+bool RobotDfsExplorer::stepThroughExploration(const vector<Location> &possibleMoves, const bool containGoal) {
 
-    const MazeCell mazeCell = maze.getGrid().get(location);
-    addMove(location);
-    updateMap(location, mazeCell.getWalls());
-    if (maze.containsGoal(location)) { found = true; return; };
-    vector<Location> possibleMoves = maze.possibleMoves(location);
+    if (!visitedLocation(currentLocation)) {
+        addMove(currentLocation);
+        explorationStack.push(currentLocation);
+        updateMap(currentLocation, possibleMoves);
+    }
+    if (containGoal) {
+        end = currentLocation;
+        return true;
+    }
 
-    bool visited = false;
     for (auto& possibleMove: possibleMoves) {
         if (!visitedLocation(possibleMove)) {
-            visited = true;
-            exploreMaze(possibleMove, maze, found);
-            if (found) return;
-            addMove(location); //write when backs
+            currentLocation = possibleMove;
+            return false;
         }
     }
-    if (!visited) deadEndCount++;
 
-}
+    if (possibleMoves.size() == 1) { deadEndCount++; }
 
-const Grid<RobotCell>& RobotDfsExplorer::getGridMap() const {
-    switch (state) {
-        case RobotState::EXPLORING: return explorationMap; break;
-        case RobotState::OPTIMIZING:
-            throw std::invalid_argument("should never happen, fix the inheritancce and polimorphizm");
+    explorationStack.pop();
+    if (!explorationStack.empty()) {
+        const auto move = explorationStack.top();
+        currentLocation = move;
+        addMove(move);
+        return false;
     }
-    throw std::invalid_argument("Unknown RobotState, check implementation");
+    return true;
 }

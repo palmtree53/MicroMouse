@@ -12,10 +12,7 @@ Simulation::Simulation(
         Robot* robot
     ): maze(maze), robot(robot) {
     cout<<"initializing simualtion"<<endl;
-    //todo assertions for start location and end location
-    cout<<"end location : "<<maze.getEnd().x()<<", "<<maze.getEnd().y()<<endl;
-    cout<<"start location: "<<maze.getStart().x()<<", "<<maze.getStart().y()<<endl;
-    cout<<"robot location: "<<robot->getLocation().x()<<", "<<robot->getLocation().y()<<endl;
+    cout<<"robot's initial location: "<<robot->getLocation().x()<<", "<<robot->getLocation().y()<<endl;
     cout<<"end initialization"<<endl<<endl;
 }
 
@@ -36,19 +33,18 @@ Simulation& Simulation::operator=(Simulation&& other) noexcept {
 
 Simulation::~Simulation() { delete robot; }
 
-void Simulation::nextStep() {
-    robot->nextStep(maze);
+bool Simulation::nextStep() const {
+    auto stepResult = robot->nextStep(maze.possibleMoves(robot->getLocation()), maze.containsGoal(robot->getLocation()));
     cout<<"next step, robot location: "<<robot->getLocation().x()<<", "<<robot->getLocation().y()
     <<"     exploration steps: "<<robot->getStepNumber()
     <<"     opptimization steps: "<<robot->getOptimalPathStepNumber()
-    <<"     dead end count: "<<robot->getDeadEndCount()
+    <<"     dead end count: "<<robot->getDeadEndCount()<<" "
     <<endl<<endl;
+    cout << "\033[J"; //for when some contents are shorter
+    return stepResult;
 }
 
 
-[[nodiscard]] Location Simulation::getRobotLocation() const {
-    return robot->getLocation();
-}
 
 [[nodiscard]] const Maze& Simulation::getMaze() const {
     return maze;
@@ -58,7 +54,4 @@ void Simulation::nextStep() {
     return robot;
 }
 
-[[nodiscard]] bool Simulation::isFinished() const {
-    return robot->isFinished();
-}
 

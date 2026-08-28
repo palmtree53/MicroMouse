@@ -22,12 +22,11 @@ public:
     /**
      * @brief Creates a new simulation by loading settings, maze, and robot from configuration files.
      * @return Fully initialized Simulation ready to run.
-     * @throws std::invalid_argument If configuration contains invalid values.  //todo
      */
     Simulation create();
 
     /**
-     * @brief Runs the simulation step by step, drawing the maze after each step until robot gives flags as finished.
+     * @brief Runs the simulation step by step, drawing the maze after each step until robot gives flag as finished.
      * @param simulation The simulation to run.
      */
     void run(Simulation &simulation);
@@ -36,8 +35,8 @@ public:
      * @brief Factory method — creates a robot of the given type.
      * @param kind Robot algorithm type: "DFS", "BFS", or "RANDOM".
      * @param start Starting location on the maze.
-     * @param width Maze grid width.
-     * @param height Maze grid height.
+     * @param width robot's Maze grid width.
+     * @param height robot's Maze grid height.
      * @return Pointer to the created Robot. Caller takes ownership.
      * @throws std::invalid_argument If kind is not recognized.
      */
@@ -51,8 +50,13 @@ public:
      */
     void runLoop();
 
+    void debug(string message) const;
+
 private:
     GameState state = GameState::PRELIMINARY; ///< Current game state. Game always strats from PRELIMINARY (menu view).
+
+    int simulationRefreshTimeInMils = 200;
+    bool isDebug = false;
 };
 
 

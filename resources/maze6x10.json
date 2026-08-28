@@ -14,6 +14,5 @@
     ["EW", "EW", "EW", "NW", "SE", "EW"],
     ["EW", "SW", "SE", "SW", "NS", "SE"],
     ["SW", "NS", "NS", "NS", "NS", "NSE"]
-  ],
-  "algorithm": "DFS"
+  ]
 }

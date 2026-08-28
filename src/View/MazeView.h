@@ -34,21 +34,19 @@ public:
 
     /**
      * @brief Draws the maze with full simulation state.
-     *
      * Renders walls, start, end, robot position and visited cells.
-     *
      * @param sim The current simulation to read state from.
      */
     void drawMaze(const Simulation& sim);
 
     /**
      * @brief Draws the maze without simulation state.
-     *
      * Renders only walls, start and end markers.
-     *
      * @param maze The maze to draw.
      */
     void drawMaze(const Maze& maze);
+
+    void drawMaze(const Grid<RobotCell> &grid);
 
     // void drawRobotMaze(const Grid<RobotCell>& state, Location currentRobotLocation);
 
@@ -66,7 +64,7 @@ private:
     void put(int x, int y, char c);
     //x, y w ramach rozmiaru widthInCells*heightInCells
     void putSprite(int x, int y, const vector<string>& sprite);
-    static vector<string> writeCell(const MazeCell &cell, const bool &containsStart, const bool &containsTarget, const bool &containsRobot = false, bool remembered = false, bool
+    static vector<string> writeCell(const AbstractCell &cell, const bool &containsStart, const bool &containsTarget, const bool &containsRobot = false, bool remembered = false, bool
                                     visited = false);
     void render() const;
 

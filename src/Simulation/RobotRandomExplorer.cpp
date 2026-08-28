@@ -6,21 +6,14 @@
 #include <stdexcept>
 
 
-const Grid<RobotCell>& RobotRandomExplorer::getGridMap() const {
-    switch (state) {
-        case RobotState::EXPLORING: return explorationMap;
-        case RobotState::OPTIMIZING:
-            throw std::invalid_argument("should never happen, fix the inheritancce and polimorphizm");
-    }
-    throw std::invalid_argument("Unknown RobotState, check implementation");
-}
 
-void RobotRandomExplorer::nextStep(const Maze& maze) {
-    if (!maze.containsGoal(currentLocation)) {
-        vector<Location> possibleMoves = maze.possibleMoves(currentLocation);
+
+bool RobotRandomExplorer::nextStep(const vector<Location> &possibleMoves, bool containGoal) {
+    if (!containGoal) {
         int randomDirection = rand() % possibleMoves.size();
         Location location = possibleMoves[randomDirection];
         currentLocation = location;
         addMove(currentLocation);
-    } else { finished = true; }
+    } else { return true; }
+    return false;
 }
