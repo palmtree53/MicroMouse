@@ -11,7 +11,7 @@ int main() {
     SetConsoleOutputCP(CP_UTF8);
 
     SimulationController simController = SimulationController();
-    simController.runLoop();
+    simController.runApplication();
 
 
     return 0;

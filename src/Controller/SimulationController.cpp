@@ -4,7 +4,6 @@
 
 #include "SimulationController.h"
 
-#include "../Simulation/RobotBFSOptimizer.h"
 #include "../Simulation/RobotDfsExplorer.h"
 #include "../Simulation/RobotRandomExplorer.h"
 #include "../Adapter/GridLoader.h"
@@ -20,7 +19,7 @@
 using namespace std;
 
 
-Simulation SimulationController::create() {
+Simulation SimulationController::createSimulation() {
     system("cls");
     cout<<"Started creating simulation procedure..."<<endl;
 
@@ -81,7 +80,7 @@ Robot* SimulationController::createRobot(const std::string& kind, const Location
     throw std::invalid_argument("Unknown robot type: " + kind);
 }
 
-void SimulationController::runLoop() {
+void SimulationController::runApplication() {
     //start - menu
     char choice = 0;
     do {
@@ -119,7 +118,7 @@ void SimulationController::runLoop() {
             }
             case GameState::RUNNING: {
                 debug("state RUNNING");
-                Simulation sim = create();
+                Simulation sim = createSimulation();
                 run(sim);
                 state = GameState::FINISHED;
                 break;

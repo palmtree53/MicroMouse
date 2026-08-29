@@ -23,7 +23,7 @@ public:
      * @brief Creates a new simulation by loading settings, maze, and robot from configuration files.
      * @return Fully initialized Simulation ready to run.
      */
-    Simulation create();
+    Simulation createSimulation();
 
     /**
      * @brief Runs the simulation step by step, drawing the maze after each step until robot gives flag as finished.
@@ -48,7 +48,7 @@ public:
      * Cycles through states: PRELIMINARY (menu), MAZE_PREVIEW, RUNNING, FINISHED.
      * Exits when user chooses to close.
      */
-    void runLoop();
+    void runApplication();
 
     void debug(string message) const;
 
